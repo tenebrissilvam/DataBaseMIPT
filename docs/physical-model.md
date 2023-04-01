@@ -20,21 +20,23 @@
 
 | Название        | Описание           | Тип данных     | Ограничение   |
 |-----------------|--------------------|----------------|---------------|
-| `task_id`         | Идентификатор задания     | `INTEGER`      | `PRIMARY KEY` |
-| `task_type`           | Тип задания  | `VARCHAR(200)` | `NOT NULL`    |
-| `med_prod`         | По завершении производит медикамент      | `INTEGER` | `FOREIGN_KEY`    |
-| `prov_prod`         | По завершении производит провиант  | `INTEGER` | `FOREIGN_KEY`    |
+| `task_id`    | Идентификатор задания     | `INTEGER`      | `PRIMARY KEY` |
+| `task_type`  | Тип задания  | `VARCHAR(200)` | `NOT NULL`    |
+| `med_prod`   | По завершении производит медикамент      | `INTEGER` | `FOREIGN_KEY`    |
+| `prov_prod`    | По завершении производит провиант  | `INTEGER` | `FOREIGN_KEY`    |
 | `appl_id`   | Используемое при выполнении оборудование      | `INTEGER` | `FOREIGN KEY`    |
-| `task_duration`       | Продолжительность выполнения    | `TIMESTAMP` | `NOT NULL`    |
-| `animal_flg`     | Флаг требуется ли для выполнения животное     | `INTEGER`  | `NOT NULL`    |
+| `task_duration`   | Продолжительность выполнения    | `TIMESTAMP` | `NOT NULL`    |
+| `animal_flg` | Флаг требуется ли для выполнения животное     | `INTEGER`  | `NOT NULL`   |
+
 Таблица `animal`:
 
-| Название             | Описание                                         | Тип данных     | Ограничение   |
-|----------------------|--------------------------------------------------|----------------|---------------|
-| `anim_id`              | Идентификатор                                    | `INTEGER`      | `PRIMARY KEY` |
-| `pet_name`               | Имя животного                                             | `VARCHAR(100)` | `NOT NULL`    |
-| `animal_type`         | Вид животного                | `VARCHAR(100)`      | `NOT NULL`    |
-| `fighting_strength`          | Боевая сила                | `NUMERIC`      | `NOT NULL`    |
+| Название             | Описание         | Тип данных     | Ограничение   |
+|----------------------|------------------|----------------|---------------|
+| `anim_id`   | Идентификатор     | `INTEGER`      | `PRIMARY KEY` |
+| `pet_name`  | Имя животного | `VARCHAR(100)` | `NOT NULL`    |
+| `animal_type`  | Вид животного  | `VARCHAR(100)`      | `NOT NULL`    |
+| `fighting_strength`   | Боевая сила     | `NUMERIC`      | `NOT NULL`    |
+
 ---
 Таблица `medicine`:
 
