@@ -10,11 +10,11 @@
 | `surname`           | Фамилия поселенца  | `VARCHAR(200)` | `NOT NULL`    |
 | `firstname`         | Имя поселенца      | `VARCHAR(200)` | `NOT NULL`    |
 | `responsibility`         | описание обязанности  | `VARCHAR(200)` | `NOT NULL`    |
-| `radiation_level`   | уровень поглощенной радиации      | `NUMERIC` | `NOT NULL`    |
+| `radiation_level`   | уровень поглощенной радиации      | `NUMERIC` | `NOT NULL`, `>= 0`, `<= 100`  |
 | `taking_medicine`       | принимаемый препарат    | `INTEGER`      | `FOREIGN KEY`    |
 | `consuming_prov`     | потребляемый провиант     | `INTEGER`  | `FOREIGN KEY`    |
 | `pet_id` | ручное животное   | `INTEGER`      | `FOREIGN KEY` |
-| `stamina`      | уровень запаса сил | `NUMERIC`    | `NOT NULL`    |
+| `stamina`      | уровень запаса сил | `NUMERIC`    | `NOT NULL` , `>= 0`, `<= 100`   |
 
 Таблица `task`:
 
@@ -22,8 +22,8 @@
 |-----------------|--------------------|----------------|---------------|
 | `task_id`    | Идентификатор задания     | `INTEGER`      | `PRIMARY KEY` |
 | `task_type`  | Тип задания  | `VARCHAR(200)` | `NOT NULL`    |
-| `med_prod`   | По завершении производит медикамент      | `INTEGER` | `FOREIGN_KEY`    |
-| `prov_prod`    | По завершении производит провиант  | `INTEGER` | `FOREIGN_KEY`    |
+| `med_prod`   | По завершении производит медикамент      | `INTEGER` | `FOREIGN_KEY`   , `>= 0` |
+| `prov_prod`    | По завершении производит провиант  | `INTEGER` | `FOREIGN_KEY` , `>= 0` |
 | `appl_id`   | Используемое при выполнении оборудование      | `INTEGER` | `FOREIGN KEY`    |
 | `task_duration`   | Продолжительность выполнения    | `TIMESTAMP` | `NOT NULL`    |
 | `animal_flg` | Флаг требуется ли для выполнения животное     | `INTEGER`  | `NOT NULL`   |
@@ -35,7 +35,7 @@
 | `anim_id`   | Идентификатор     | `INTEGER`      | `PRIMARY KEY` |
 | `pet_name`  | Имя животного | `VARCHAR(100)` | `NOT NULL`    |
 | `animal_type`  | Вид животного  | `VARCHAR(100)`      | `NOT NULL`    |
-| `fighting_strength`   | Боевая сила     | `NUMERIC`      | `NOT NULL`    |
+| `fighting_strength`   | Боевая сила     | `NUMERIC`      | `NOT NULL`  , `>= 0`  |
 
 ---
 Таблица `medicine`:
@@ -44,8 +44,8 @@
 |-------------|---------------------------------|-------------|---------------|
 | `med_id`    | Идентификатор препарата             | `INTEGER`   | `PRIMARY KEY` |
 | `med_type`     | Тип препарата           | `VARCHAR(100)`   | `NOT NULL` |
-| `restores_rad`     | Восстаналивает единиц радиации             | `NUMERIC`   | `NOT NULL` |
-| `med_cnt` | Количество препарата на складе                    | `INTEGER` | `NOT NULL`    |
+| `restores_rad`     | Восстаналивает единиц радиации             | `NUMERIC`   | `NOT NULL`, `>= 0` |
+| `med_cnt` | Количество препарата на складе                    | `INTEGER` | `NOT NULL`  , `>= 0`  |
 
 
 Таблица `provisions`:
@@ -54,8 +54,8 @@
 |-------------|---------------------------------|-------------|---------------|
 | `prov_id`    | Идентификатор провианта             | `INTEGER`   | `PRIMARY KEY` |
 | `prov_type`     | Тип провианта           | `VARCHAR(100)`   | `NOT NULL` |
-| `nutritional_val`     | Восстаналивает единиц запаса сил             | `NUMERIC`   | `NOT NULL` |
-| `prov_cnt` | Количество провианта на складе                    | `INTEGER` | `NOT NULL`    |
+| `nutritional_val`     | Восстаналивает единиц запаса сил             | `NUMERIC`   | `NOT NULL`, `>= 0` |
+| `prov_cnt` | Количество провианта на складе                    | `INTEGER` | `NOT NULL`   , `>= 0` |
 
 
 Таблица `appliance`:
@@ -64,7 +64,7 @@
 |-------------|---------------------------------|-------------|---------------|
 | `appl_id`    | Идентификатор оборудования   | `INTEGER`   | `PRIMARY KEY` |
 | `appl_type`     | Тип оборудования           | `VARCHAR(100)`   | `NOT NULL` |
-| `stamina_req`     | Требуемый запас сил для использования     | `NUMERIC`   | `NOT NULL` |
+| `stamina_req`     | Требуемый запас сил для использования     | `NUMERIC`   | `NOT NULL` , `>= 0`|
 
 
 Таблица `bedroom`:
@@ -72,14 +72,14 @@
 | Название    | Описание                        | Тип данных  | Ограничение   |
 |-------------|---------------------------------|-------------|---------------|
 | `bedroom_id`    | Идентификатор комнаты отдыха             | `INTEGER`   | `PRIMARY KEY` |
-| `res_stamina`     | Восстаналивает единиц запаса сил             | `NUMERIC`   | `NOT NULL` |
-| `bed_cnt` | Количество коек в комнате                    | `INTEGER` | `NOT NULL`    |
+| `res_stamina`     | Восстаналивает единиц запаса сил             | `NUMERIC`   | `NOT NULL` , `>= 0`|
+| `bed_cnt` | Количество коек в комнате                    | `INTEGER` | `NOT NULL`   , `>= 0` |
 ---
 Таблица `actual_tasks`:
 
 | Название    | Описание                        | Тип данных  | Ограничение   |
 |-------------|---------------------------------|-------------|---------------|
-| `executor`    |   id поселенца, исполняющего задание   | `INTEGER`   | `FOREIGN KEY` |
+| `executor`    |   id поселенца, исполняющего задание   | `INTEGER`   | `FOREIGN KEY` , , `UNIQUE`|
 | `task_id`     | id исполняемого задания   | `INTEGER`   | `FOREIGN KEY` |
 
 Таблица `task_history`:
