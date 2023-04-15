@@ -1,42 +1,5 @@
 create schema if not exists cd;
 
-CREATE TABLE cd.person(
-   person_id          INTEGER                  NOT null,
-   surname            CHARACTER VARYING(200)   NOT NULL,
-   firstname          CHARACTER VARYING(200)   NOT NULL,
-   responsibility     CHARACTER VARYING(300)   NOT NULL,
-   radiation_level    NUMERIC                  NOT NULL CHECK (radiation_level >= 0 and radiation_level <= 100),
-   taking_medicine    INTEGER                  NOT NULL,
-   consuming_prov     INTEGER			       NOT NULL,
-   pet_id             INTEGER                  NOT NULL,
-   stamina            NUMERIC                  NOT NULL CHECK (stamina >= 0 and stamina <= 100),
-   CONSTRAINT person_pk PRIMARY KEY (person_id),
-   CONSTRAINT fk_medicine FOREIGN KEY (taking_medicine)
-       REFERENCES cd.medicine(med_id) ON DELETE SET NULL,
-   CONSTRAINT fk_provisions FOREIGN KEY (consuming_prov)
-       REFERENCES cd.provisions(prov_id) ON DELETE SET NULL,
-   CONSTRAINT fk_animal FOREIGN KEY (pet_id)
-       REFERENCES cd.animal(anim_id) ON DELETE SET NULL
-);
-
-CREATE TABLE cd.task(
-   task_id          INTEGER                  NOT NULL,
-   task_type        CHARACTER VARYING(200)   NOT NULL,
-   med_prod         INTEGER                  NOT NULL CHECK (med_prod >= 0),
-   prov_prod        INTEGER			         NOT NULL CHECK (prov_prod >= 0),
-   appl_id          INTEGER			         NOT NULL,
-   task_duration    TIMESTAMP                NOT NULL,
-   animal_flg       INTEGER                  NOT NULL,
-   CONSTRAINT task_pk PRIMARY KEY (task_id),
-   CONSTRAINT fk_medicine FOREIGN KEY (med_prod)
-       REFERENCES cd.medicine(med_id) ON DELETE SET NULL,
-   CONSTRAINT fk_provisions FOREIGN KEY (prov_prod)
-       REFERENCES cd.provisions(prov_id) ON DELETE SET NULL,
-   CONSTRAINT fk_appliance FOREIGN KEY (appl_id)
-       REFERENCES cd.appliance(appl_id) ON DELETE SET NULL
-);
-
-
 CREATE TABLE cd.animal(
    anim_id     INTEGER   NOT NULL, 
    pet_name    CHARACTER VARYING(50)   NOT NULL, 
@@ -79,6 +42,43 @@ CREATE TABLE cd.bedroom(
    res_stamina          NUMERIC                NOT NULL CHECK (res_stamina >= 0), 
    CONSTRAINT bedroom_pk PRIMARY KEY (bedroom_id)
 );
+
+CREATE TABLE cd.person(
+   person_id          INTEGER                  NOT null,
+   surname            CHARACTER VARYING(200)   NOT NULL,
+   firstname          CHARACTER VARYING(200)   NOT NULL,
+   responsibility     CHARACTER VARYING(300)   NOT NULL,
+   radiation_level    NUMERIC                  NOT NULL CHECK (radiation_level >= 0 and radiation_level <= 100),
+   taking_medicine    INTEGER                  NOT NULL,
+   consuming_prov     INTEGER			       NOT NULL,
+   pet_id             INTEGER                  NOT NULL,
+   stamina            NUMERIC                  NOT NULL CHECK (stamina >= 0 and stamina <= 100),
+   CONSTRAINT person_pk PRIMARY KEY (person_id),
+   CONSTRAINT fk_medicine FOREIGN KEY (taking_medicine)
+       REFERENCES cd.medicine(med_id) ON DELETE SET NULL,
+   CONSTRAINT fk_provisions FOREIGN KEY (consuming_prov)
+       REFERENCES cd.provisions(prov_id) ON DELETE SET NULL,
+   CONSTRAINT fk_animal FOREIGN KEY (pet_id)
+       REFERENCES cd.animal(anim_id) ON DELETE SET NULL
+);
+
+CREATE TABLE cd.task(
+   task_id          INTEGER                  NOT NULL,
+   task_type        CHARACTER VARYING(200)   NOT NULL,
+   med_prod         INTEGER                  NOT NULL CHECK (med_prod >= 0),
+   prov_prod        INTEGER			         NOT NULL CHECK (prov_prod >= 0),
+   appl_id          INTEGER			         NOT NULL,
+   task_duration    interval                 NOT NULL,
+   animal_flg       INTEGER                  NOT NULL,
+   CONSTRAINT task_pk PRIMARY KEY (task_id),
+   CONSTRAINT fk_medicine FOREIGN KEY (med_prod)
+       REFERENCES cd.medicine(med_id) ON DELETE SET NULL,
+   CONSTRAINT fk_provisions FOREIGN KEY (prov_prod)
+       REFERENCES cd.provisions(prov_id) ON DELETE SET NULL,
+   CONSTRAINT fk_appliance FOREIGN KEY (appl_id)
+       REFERENCES cd.appliance(appl_id) ON DELETE SET NULL
+);
+
 
 CREATE TABLE cd.actual_tasks(
    executor               INTEGER                NOT NULL UNIQUE, 
