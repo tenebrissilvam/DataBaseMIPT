@@ -1,5 +1,7 @@
 --CRUD - Sreate, Read, Update, Delete
 
+select * from cd.animal a ;
+
 --Create:
 
 insert into cd.person (person_id, surname, firstname, responsibility, radiation_level, taking_medicine, consuming_prov, pet_id, stamina)
