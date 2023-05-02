@@ -37,3 +37,22 @@ create index idx_room_id
 	on cd.sleep_schedule
 	using btree
 	(room_id);
+	
+--Индекс по дате начала и индекс по дате завершения задания в таблице с историей заданий 
+
+create index idx_starting_time_id
+	on cd.task_history
+	using btree
+	(task_started);
+
+create index idx_ending_time_id
+	on cd.task_history 
+	using btree
+	(task_ended);
+
+--Индекс по id животных
+
+create index idx_anim_id 
+	on cd.animal 
+	using btree
+	(anim_id);
