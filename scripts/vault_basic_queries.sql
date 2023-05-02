@@ -1,6 +1,4 @@
---CRUD - Sreate, Read, Update, Delete
-
-select * from cd.animal a ;
+--CRUD - Сreate, Read, Update, Delete
 
 --Create:
 
@@ -15,20 +13,40 @@ values (602, 'X-cell', 65, 20);
 
 --Read:
 
-select surname, firstname from cd.person p where responsibility = 'Mercenary';
+select 
+	surname, 
+	firstname 
+from cd.person p 
+where responsibility = 'Mercenary';
 
-select med_type from cd.medicine m where restores_rad > 100;
+select 
+	med_type 
+from cd.medicine m 
+where restores_rad > 100;
 
-select prov_type from cd.provisions p where nutritional_val > 100 and nutritional_val < 180;
+select 
+	prov_type 
+from cd.provisions p 
+where nutritional_val > 100 
+	and nutritional_val < 180;
 
 --Update:
 
-update cd.medicine set med_cnt = 100 where med_id = 2;
+update cd.medicine 
+set med_cnt = 100 
+where med_id = 2;
 
-update cd.animal set fighting_strength = 55 where animal_type = 'cat' and fighting_strength < 55;
+update cd.animal 
+set fighting_strength = 55 
+where animal_type = 'cat' 
+	and fighting_strength < 55;
 
 --Delete:
 
-delete from cd.person where radiation_level > 90;
+delete 
+from cd.person 
+where radiation_level > 90;
 
-delete from cd.bedroom where bedroom_id = 105;
+delete 
+from cd.bedroom 
+where bedroom_id = 105;
