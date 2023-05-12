@@ -30,8 +30,7 @@ variables:
 #  аккуратное формирование всяких абсолютных
 #  путей к файлам и директориям
 #  у вас будет ${PROJECT_DIR} тождественно равен ${CI_PROJECT_DIR}
-  PROJECT_DIR: ${CI_PROJECT_DIR}/project/example
-  ANALYSIS_DIR: ${PROJECT_DIR}/analysis
+  PROJECT_DIR: ${CI_PROJECT_DIR}
   SCRIPTS_DIR: ${PROJECT_DIR}/scripts
   TESTS_DIR: ${PROJECT_DIR}/tests
   UTILS_DIR: ${PROJECT_DIR}/utils
