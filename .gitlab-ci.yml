@@ -106,3 +106,4 @@ task 12th:
     - .setup
   script:
     - python3 ${PYPSQL} --file="${SCRIPTS_DIR}/vault_ddl.sql"
+
