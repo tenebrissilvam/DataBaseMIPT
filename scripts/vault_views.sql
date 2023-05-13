@@ -39,9 +39,13 @@ select * from cd.provisions_info_view;
 --Сводная таблица с количеством заданий, выполненным каждым человеком и суммарным числом часов работы
 
 create view cd.tasks_per_person as
-select sub.firstname ||' '|| sub.surname as person, sub.completed_tasks as completed, sub.working_hours
+select sub.firstname ||' '|| sub.surname as person, 
+sub.completed_tasks as completed, sub.working_hours
 from (
-	select p.person_id, p.firstname, p.surname, count(*) as completed_tasks, sum(t.task_duration) as working_hours, row_number()
+	select p.person_id, p.firstname, p.surname, 
+	count(*) as completed_tasks, 
+	sum(t.task_duration) as working_hours, 
+	row_number()
 	over (partition by p.person_id order by count(*) desc) as row_num
 	from cd.person p join cd.task_history th on th.executor = p.person_id
 	join cd.task t on t.task_id = th.task_id 
@@ -54,7 +58,10 @@ select * from cd.tasks_per_person;
 --Сводная таблица со среднем уровнем облучения и запаса сил по каждой обязанности
 
 create view cd.mean_stats_by_responsibility as
-select p.responsibility, avg(p.radiation_level) as mean_radiation, avg(p.stamina) as mean_stamina
+select
+p.responsibility, 
+avg(p.radiation_level) as mean_radiation,
+avg(p.stamina) as mean_stamina
 from cd.person p 
 group by p.responsibility
 order by mean_radiation, mean_stamina desc;
@@ -65,9 +72,14 @@ select * from cd.mean_stats_by_responsibility;
 --часов его работы
 
 create view cd.tasks_per_appliance as
-select sub.appl_type, sub.completed_tasks as completed, sub.working_hours
+select sub.appl_type, sub.completed_tasks as completed,
+sub.working_hours
 from (
-	select a.appl_id, a.appl_type, count(*) as completed_tasks, sum(t.task_duration) as working_hours, row_number()
+	select a.appl_id,
+	a.appl_type,
+	count(*) as completed_tasks, 
+	sum(t.task_duration) as working_hours,
+	row_number()
 	over (partition by a.appl_id order by count(*) desc) as row_num
 	from cd.task_history th join cd.task t on t.task_id = th.task_id
 	join cd.appliance a on t.appl_id = a.appl_id

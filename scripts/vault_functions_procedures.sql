@@ -31,10 +31,9 @@ $$
 begin
 	update cd.person p
 		set p.radiation_level = case 
-									when p.radiation_level + rad <= 100 then p.radiation_level = p.radiation_level + rad
-									else p.radiation_level = 100
-									
-								end;
+			when p.radiation_level + rad <= 100 then p.radiation_level = p.radiation_level + rad
+			else p.radiation_level = 100
+		end;
 	delete 
 	from cd.person p
 	where p.radiation_level = 100;
