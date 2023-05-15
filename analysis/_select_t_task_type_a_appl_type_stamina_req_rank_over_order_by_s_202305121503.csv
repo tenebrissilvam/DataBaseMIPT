@@ -1,0 +1,11 @@
+"task_type","appl_type","stamina_req","rank"
+Hunting,Weapons Range,100,1
+Electricity maintainance,Elictricity generator,90,2
+Fixing machinery,Armour Workbench,80,3
+Fixing machinery,Weapons Workbench,80,3
+Gardening,Water facility,80,5
+Fixing machinery,Explosives Workbench,50,6
+Food Preparation,Stove,40,7
+Healing,Surgeon table,30,8
+Medicine preparation,Meds Workbench,30,9
+Defence of Vault,Blockpost,10,10
